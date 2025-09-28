@@ -2,9 +2,11 @@ import pandas as pd
 import numpy as np
 import re
 import string,time
+import shortforms
 data=pd.read_csv('IMDB Dataset.csv')
 df=pd.DataFrame(data)
 text="<h1>Welcome to<P> Python <a>Programming</h1>"
+data1=shortforms.short_forms
 # Convert text to lower case
 def lower_case(text):
     data['review']=data['review'].str.lower()
@@ -32,4 +34,15 @@ def remove_punctuation(text):
     return text 
 data['review']=data['review'].apply(remove_punctuation)
 print(data)
+# chat short forms handling
+def chat_convertions(text):
+    new_text=[]
+    for word in text.split():
+        if word.lower() in data1:
+            new_text.append(data1[word.lower()])
+        else:
+            new_text.append(word)
+    return " ".join(new_text)
+print(chat_convertions("i'm idk"))
+
     
